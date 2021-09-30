@@ -1,7 +1,15 @@
- %  help imnoise:
- %   J = imnoise(I,'gaussian',M,V) adds Gaussian white noise of mean M and
- %  variance V to the image I. When unspecified, M and V default to 0 and
- %  0.01 respectively.
+%---------------------------------------------------------------------
+% file name : hmwk_2_prob_3.m
+% Student: Ray Duran
+% Date: 9/29/21
+% Class : EECS 590 Professor Liang, Fall Semester
+% University of North Dakota
+% Descr: 
+% help imnoise:
+% J = imnoise(I,'gaussian',M,V) adds Gaussian white noise of mean M and
+% variance V to the image I. When unspecified, M and V default to 0 and
+% 0.01 respectively.
+%--------------------------------------------------------------------- 
  J = imread('cameraman.tif');
  
  
@@ -34,7 +42,3 @@
  imwrite(JN3,'cameraman_gauss_m_eq_1_v_eq_dot02.tif');
 
 
- 
- 
- 
- % Save files
