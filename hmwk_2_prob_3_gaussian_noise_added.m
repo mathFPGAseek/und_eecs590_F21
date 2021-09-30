@@ -1,5 +1,5 @@
 %---------------------------------------------------------------------
-% file name : hmwk_2_prob_3.m
+% file name : hmwk_2_prob_3_gaussian_noise_added.m
 % Student: Ray Duran
 % Date: 9/29/21
 % Class : EECS 590 Professor Liang, Fall Semester

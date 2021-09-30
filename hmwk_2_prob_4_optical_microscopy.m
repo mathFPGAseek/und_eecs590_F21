@@ -1,8 +1,17 @@
-%% sobel filter - edge detection
-I = imread('cell.tif');
 
+%---------------------------------------------------------------------
+% file name : hmwk_2_prob_4_optical_microscopy.m
+% Student: Ray Duran
+% Date: 9/29/21
+% Class : EECS 590 Professor Liang, Fall Semester
+% University of North Dakota
+% Descr: 
+% Estimate the number of pixels in cell.tif
 % Code borrowed from Matlab example
 % https://www.mathworks.com/help/images/detecting-a-cell-using-image-segmentation.html
+%--------------------------------------------------------------------- 
+%% sobel filter - edge detection
+I = imread('cell.tif');
 
 [~,threshold] = edge(I,'sobel');
 fudgeFactor = 0.5;

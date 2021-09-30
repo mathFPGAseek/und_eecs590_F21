@@ -1,3 +1,12 @@
+%---------------------------------------------------------------------
+% file name : hmwk_2_prob_5_estimate_rice_grains_in_noise.m
+% Student: Ray Duran
+% Date: 9/29/21
+% Class : EECS 590 Professor Liang, Fall Semester
+% University of North Dakota
+% Descr: 
+% Estimate the number of rice grains
+%--------------------------------------------------------------------- 
 image = imread('rice_noise.png');
 figure(1)
 imshow(image)
