@@ -123,9 +123,13 @@ major_axis_image = max(nnz_count);
 
 %
 % True pixel size is 6.5e-6* 40(mag power)
-pixel_size = 6.5e-6*40; % one dim
+pixel_size = (6.5/40)*1e-6; % one aquare
+pixel_dim = sqrt(pixel_size);
+
+length_major_axis = major_axis_image*pixel_dim;
+length_minor_axis = minor_axis_image*pixel_dim;
 
 % Size of the cell
-size_of_cell = pi*major_axis_image*minor_axis_image*(pixel_size*pixel_size); 
+size_of_cell = pi*length_major_axis*length_minor_axis; 
 
 
