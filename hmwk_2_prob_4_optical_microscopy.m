@@ -65,7 +65,7 @@ for i = 1 : rows
 end
 
             
-%% Image rotation and translation
+%% Calculate Area with elliptical axes
 
 
 % Rotation of the image
