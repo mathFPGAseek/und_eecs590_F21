@@ -8,7 +8,9 @@
 % Calculate the Optical and modulation transfer functions, OTF and 
 % MTF of a black box aperture
 %
-% All code Borrowed from Prof Bo Liang in his Fourier Optics MATLAB demo!!
+%
+% All code Borrowed from Prof Bo Liang in his Fourier Optics MATLAB demo,
+% from EECS 590
 %
 %---------------------------------------------------------------------
 A = rgb2gray(imread('USAF-1951.png'));
@@ -29,19 +31,24 @@ v = -L2/2:dv:L2/2-dv;
 lambda = 0.5*10^-6;
 wxp = 6.25e-3;
 zxp = 125e-3;
-f0 = wxp/(lambda*zxp); % ??? why is this docal length
+f0 = wxp/(lambda*zxp); 
 
-fu = -1/(2*du):1/L1:1/(2*du)-(1/L1); % why ??? what is this ???
-fv = -1/(2*dv):1/L2:1/(2*dv)-(1/L2); % why ??? what is this ???
+fu = -1/(2*du):1/L1:1/(2*du)-(1/L1);
+fv = -1/(2*dv):1/L2:1/(2*dv)-(1/L2); 
 
 [Fu,Fv] = meshgrid(fu,fv);
 
-H = circ(sqrt(Fu.^2+Fv.^2)/f0); % why divide by f0 ???
-                                % ??? Get error with circ func from mathworks
+H = circ(sqrt(Fu.^2+Fv.^2)/f0);  % This is logical
+H_doub = double(H);
+H_area = nnz(H_doub); % Calculate area of aperture
+                           
 
-PSF_coh  = abs(fftshift(fft2(H))); % ??? Is this the PSF amp as shown
-                                   % in the Fourier Theory of Image
-                                   % Formation ??? ( Yellow block)
+PSF_incoh  = abs(fftshift(fft2(H)))/H_area; % This is also known as the
+                                   % Optical transfer function, where 
+                                   % we have to square the H because the
+                                   % impulse responce of such a system is
+                                   % the sqaure magnitude of the amplitude
+                                   % impulse response.
                                    % Note: This is essentially the foundation
                                    % of diffraction modeling
                                    % Fraunhofer Diffraction fomrula where
@@ -49,29 +56,26 @@ PSF_coh  = abs(fftshift(fft2(H))); % ??? Is this the PSF amp as shown
                                    % as an approx then the transfer
                                    % fucntiuo is a 2D transform!
                                   
-PSF = PSF_coh;
-ATF = fft2(PSF); % ???  is the ATF really the coherent transfer fucntion ???
-                 % ( Green block)
-ATF = ATF/ATF(1,1);
+PSF = PSF_incoh;
+OTF = fft2(PSF); 
+OTF = OTF/OTF(1,1);
 
 figure
 subplot(2,2,1)
 mesh(uu,vv,PSF) 
 subplot(2,2,2)
-MTF = abs(fftshift(ATF)); 
-mesh(Fv,Fu,MTF) %% ??? why use Fv and Fu and uu and vv earlier for PSF
+MTF = abs(fftshift(OTF)); 
+mesh(Fv,Fu,MTF)
 subplot(2,2,3)
-imagesc(u,v,PSF_coh)
+imagesc(u,v,PSF_incoh)
 subplot(2,2,4)
-MTF = abs(fftshift(ATF)); 
-imagesc(fu,fv,MTF) %% ??? Why use fu and fv
+MTF = abs(fftshift(OTF)); 
+imagesc(fu,fv,MTF) 
 
-% Isn't stuff below the answer ???
-% Except for Ug we use Intensity
-% ??? and what do we use for ATF Just H^2
+
 %
-Gg = fft2(Ug);
-Gi = Gg.*ATF;
+Gg = fft2(Ig); % Use Ig for incoherent system
+Gi = Gg.*OTF;
 Ui = ifftshift(ifft2(Gi));
 Ui = abs(Ui);
 Ii = Ui.^2;
