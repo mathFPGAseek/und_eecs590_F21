@@ -7,6 +7,7 @@
 % University of North Dakota
 % Descr: 
 % Model a Digital Micro-Mirror Device(DMD) with a Bernouli Random Matrix
+% Calculate the mutual coherence of the sensing and representation matrices
 %
 %
 % Code Borrowed from : 
