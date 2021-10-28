@@ -8,31 +8,29 @@
 % Descr: 
 % Examples with DCT and DFT
 %---------------------------------------------------------------------
+clear;
+close all;
 
 A = imread('cameraman.tif');
 A_doub = double (A);
-debug = 1;
-
 
 X_DCT = dct(A_doub);
 X_DFT = fft(A_doub);
 
 X_DFT_real = abs(X_DFT)
 
-debug = 1;
 
 figure(1)
 h = surf(X_DCT)
+title('DCT of Cameraman')
 
 set(h,'LineStyle','none')
 
 figure(2)
 g = surf(X_DFT_real)
+title('DFT of Cameraman')
 
 set(g,'LineStyle','none')
-
-
-debug = 1;
 
 
 
